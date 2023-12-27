@@ -5,6 +5,8 @@ This software generates a first name, surname and date of birth, which can be co
 
 It's also possible to save used identifiers in encrypted form, without local storage of the key. Saved identifiers can be consulted after decryption using the same key that was used for encryption.
 
+![Alt text](https://drive.google.com/file/d/1UYHJTz_ezg7EZxSly-XiBNHsZgbFQMO9/view?usp=sharing)
+
 ## Tree
 ``` bash
 ∟ lorem_ipsum

@@ -17,7 +17,7 @@ class Core_Lorem_Ipsum(QMainWindow, Ui_MainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
 
-        self.version = "0.2"
+        self.version = "0.3"
 
         self.surname = ""
         self.name = ""
@@ -76,6 +76,7 @@ class Core_Lorem_Ipsum(QMainWindow, Ui_MainWindow):
         self.latin_csv_path = os.path.join(dir, '../data/dictionary_latin.csv')
         self.history_csv_path = os.path.join(dir, '../data/dictionary_history.csv')
         self.icon_path = os.path.join(dir, '../data/icon.png')
+
 
     def _init_data(self):
         if os.path.exists(self.latin_csv_path):
@@ -156,6 +157,7 @@ class Core_Lorem_Ipsum(QMainWindow, Ui_MainWindow):
                 ciphertext_surname, ciphertext_name, ciphertext_birth_date = self.encrypt_data()
                 self.save_encrypted_data(ciphertext_surname, ciphertext_name, ciphertext_birth_date)
             elif not self.mode:
+                print("History decrypted\n")
                 self.decrypt_csv()
 
             self.switch_save_to_generate_menu()
@@ -212,7 +214,7 @@ class Core_Lorem_Ipsum(QMainWindow, Ui_MainWindow):
             with open(self.history_csv_path, 'r', newline='') as csvfile:
                 reader = csv.reader(csvfile)
 
-                for line in reader:
+                for index, line in enumerate(reader, start=0):
 
                     if not line:
                         continue
@@ -235,7 +237,7 @@ class Core_Lorem_Ipsum(QMainWindow, Ui_MainWindow):
                     except:
                         birth_date = "Invalid Key"
 
-                    print("Surname : %s\nName : %s\nBirth date : %s\n\n"%(surname, name, birth_date))
+                    print("Line n°%s\nSurname : %s\nName : %s\nBirth date : %s\n\n"%(index, surname, name, birth_date))
 
 
     def switch_generate_to_key_menu(self):

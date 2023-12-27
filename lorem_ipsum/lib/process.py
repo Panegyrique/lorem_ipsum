@@ -17,7 +17,7 @@ class Core_Lorem_Ipsum(QMainWindow, Ui_MainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
 
-        self.version = "0.1"
+        self.version = "0.2"
 
         self.surname = ""
         self.name = ""
@@ -220,11 +220,20 @@ class Core_Lorem_Ipsum(QMainWindow, Ui_MainWindow):
                     data_parts = line[0].split('SEP')
 
                     cipher = AES.new(self.key, AES.MODE_ECB)
-                    surname = ((cipher.decrypt(base64.b64decode(data_parts[0]))).decode('utf-8')).replace('-', '')
+                    try:
+                        surname = ((cipher.decrypt(base64.b64decode(data_parts[0]))).decode('utf-8')).replace('-', '')
+                    except:
+                        surname = "Invalid Key"
                     cipher = AES.new(self.key, AES.MODE_ECB)
-                    name = ((cipher.decrypt(base64.b64decode(data_parts[1]))).decode('utf-8')).replace('-', '')
+                    try:
+                        name = ((cipher.decrypt(base64.b64decode(data_parts[1]))).decode('utf-8')).replace('-', '')
+                    except:
+                        name = "Invalid Key"
                     cipher = AES.new(self.key, AES.MODE_ECB)
-                    birth_date = ((cipher.decrypt(base64.b64decode(data_parts[2]))).decode('utf-8')).replace('-', '')
+                    try:
+                        birth_date = ((cipher.decrypt(base64.b64decode(data_parts[2]))).decode('utf-8')).replace('-', '')
+                    except:
+                        birth_date = "Invalid Key"
 
                     print("Surname : %s\nName : %s\nBirth date : %s\n\n"%(surname, name, birth_date))
 
